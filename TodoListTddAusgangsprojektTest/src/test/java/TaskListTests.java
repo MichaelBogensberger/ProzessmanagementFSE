@@ -57,7 +57,7 @@ public class TaskListTests {
     public void testGetTaskByIndex() {
         taskList.addTask(task);
         Task foundTask = taskList.getTaskFromIndex(0);
-        assertFalse(foundTask instanceof Task);
+        assertTrue(foundTask instanceof Task);
 
     }
 
