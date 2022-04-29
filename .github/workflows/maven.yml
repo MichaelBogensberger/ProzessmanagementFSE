@@ -18,12 +18,3 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
       - name: Run tests with Maven
         run: mvn -B test --file TodoListTddAusgangsprojektTest/pom.xml
-        
-      - name: Report
-        uses: dorny/test-reporter@v1
-        if: always()
-        with:
-          name: Maven Tests
-          path: TodoListTddAusgangsprojektTest/target/surefire-reports/*.xml
-          reporter: java-junit
-          fail-on-error: true
