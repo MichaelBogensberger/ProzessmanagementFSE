@@ -20,7 +20,7 @@ jobs:
           distribution: 'zulu'
 
       - name: Build
-        run: mvn --batch-mode -DskipTests package
+        run: mvn -B package --file TodoListTddAusgangsprojektTest/pom.xml
 
       - name: Test
         run: mvn --batch-mode -Dmaven.test.failure.ignore=true test
