@@ -9,10 +9,8 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.junit.jupiter.MockitoSettings;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,14 +40,14 @@ public class TaskListTests {
 
     @BeforeEach
     void setup() {
-        LocalDateTime date = LocalDateTime.of(2023, 1, 1,4,22);
+        LocalDateTime date = LocalDateTime.of(2023, 1, 1, 4, 22);
         taskList = new TaskList();
 
         taskTitle = new TaskTitle("Hausaufgaben");
         taskDescription = new TaskDescription("mache alle wichtigen Hausaufgaben!");
         taskPriority = new TaskPriority(1);
-        task = new Task(taskTitle,taskDescription,date,taskPriority);
-        task1 = new Task(taskTitle,taskDescription,date,taskPriority);
+        task = new Task(taskTitle, taskDescription, date, taskPriority);
+        task1 = new Task(taskTitle, taskDescription, date, taskPriority);
 
         tag = new Tag("Hausaufgaben");
 
@@ -59,7 +57,7 @@ public class TaskListTests {
     public void testGetTaskByIndex() {
         taskList.addTask(task);
         Task foundTask = taskList.getTaskFromIndex(0);
-        assertTrue(foundTask instanceof Task);
+        assertFalse(foundTask instanceof Task);
 
     }
 
@@ -115,16 +113,13 @@ public class TaskListTests {
     }
 
 
-
-
-
     @Test
     public void testSortedByPriority() {
         TaskPriority high = new TaskPriority(1);
         TaskPriority low = new TaskPriority(10);
 
-        Task taskWithPrioLow = new Task(taskTitle,taskDescription,date,low);
-        Task taskWithPrioHigh = new Task(taskTitle,taskDescription,date,high);
+        Task taskWithPrioLow = new Task(taskTitle, taskDescription, date, low);
+        Task taskWithPrioHigh = new Task(taskTitle, taskDescription, date, high);
 
         taskList.addTask(taskWithPrioHigh);
         taskList.addTask(taskWithPrioLow);
@@ -135,12 +130,11 @@ public class TaskListTests {
 
         assertAll("assert sortion",
                 () -> assertEquals(taskWithPrioLow, foundTaskList.get(0)),
-                () ->  assertEquals(taskWithPrioHigh, foundTaskList.get(1))
+                () -> assertEquals(taskWithPrioHigh, foundTaskList.get(1))
         );
 
 
     }
-
 
 
     @ParameterizedTest
@@ -150,12 +144,12 @@ public class TaskListTests {
             "Für Mathe lernen, für die SA vorbereiten, 1, test",
             "Deutsch Text schreiben, schreibe eine Textanalyse, 4, freiwillig"
     })
-    void testGetWithTag(String title, String description, int priority, String tag){
+    void testGetWithTag(String title, String description, int priority, String tag) {
 
         TaskTitle taskTitleParam = new TaskTitle(title);
         TaskDescription taskDescriptionParam = new TaskDescription(description);
         TaskPriority taskPriorityParam = new TaskPriority(priority);
-        Task taskParam = new Task(taskTitleParam,taskDescriptionParam,date, taskPriorityParam);
+        Task taskParam = new Task(taskTitleParam, taskDescriptionParam, date, taskPriorityParam);
         taskParam.addTag(new Tag(tag));
 
         taskList.addTask(taskParam);
@@ -184,18 +178,6 @@ public class TaskListTests {
         assertEquals(task1, foundTasks.get(0));
 
     }
-
-    
-
-
-
-
-
-
-
-
-
-
 
 
 }
